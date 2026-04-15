@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Hiii 🌈</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ffecd2, #a1c4fd, #c2e9fb);
+    background-size: 400% 400%;
+    animation: gradientShift 6s ease infinite;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 30px; height: 30px;
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+  }
+
+  /* Floating emojis background */
+  .floaters {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .floater {
+    position: absolute;
+    font-size: 2rem;
+    animation: floatUp linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Main container */
+  .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+    gap: 30px;
+  }
+
+  /* Hero card */
+  .hero {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(255,100,150,0.25);
+    max-width: 400px;
+    width: 100%;
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes popIn {
+    0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .big-emoji {
+    font-size: 5rem;
+    display: block;
+    animation: wiggle 1.5s ease-in-out infinite;
+    margin-bottom: 10px;
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-10deg) scale(1); }
+    25%       { transform: rotate(10deg) scale(1.1); }
+    50%       { transform: rotate(-5deg) scale(1.05); }
+    75%       { transform: rotate(8deg) scale(1.1); }
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbowText 3s linear infinite;
+    margin-bottom: 10px;
+  }
+
+  @keyframes rainbowText {
+    0%   { background-position: 0%; }
+    100% { background-position: 300%; }
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* Bounce cards row */
+  .cards {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 420px;
+    width: 100%;
+  }
+
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px 15px;
+    text-align: center;
+    flex: 1;
+    min-width: 100px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+    animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.2s; }
+  .card:nth-child(2) { animation-delay: 0.4s; }
+  .card:nth-child(3) { animation-delay: 0.6s; }
+
+  @keyframes bounceIn {
+    0%   { transform: translateY(60px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  .card:active { transform: scale(0.9) rotate(-3deg); }
+
+  .card .icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+  .card .label { font-size: 0.85rem; font-weight: 700; color: #555; }
+
+  /* Joke box */
+  .joke-box {
+    background: rgba(255,255,255,0.9);
+    border-radius: 25px;
+    padding: 25px 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(255,150,100,0.2);
+    animation: slideUp 0.7s ease 0.8s both;
+  }
+
+  @keyframes slideUp {
+    0%   { transform: translateY(40px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  .joke-box h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #ff6b6b;
+  }
+
+  #joke-text {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.7;
+    min-height: 60px;
+    transition: opacity 0.3s;
+  }
+
+  .btn {
+    margin-top: 15px;
+    background: linear-gradient(135deg, #ff6b6b, #feca57);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(255,100,100,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn:active {
+    transform: scale(0.93);
+    box-shadow: 0 2px 10px rgba(255,100,100,0.3);
+  }
+
+  /* Heart rain trigger */
+  .heart-btn {
+    background: linear-gradient(135deg, #ff9ff3, #ff6b6b);
+    font-size: 1.1rem;
+    padding: 14px 32px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 5px 20px rgba(255,100,150,0.4); }
+    50%       { box-shadow: 0 5px 40px rgba(255,100,150,0.8); transform: scale(1.04); }
+  }
+
+  /* Heart rain container */
+  .heart-rain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  .falling-heart {
+    position: absolute;
+    top: -40px;
+    will-change: transform, opacity;
+    animation: fallDown linear forwards;
+  }
+
+  @keyframes fallDown {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    70%  { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Popup message */
+  .popup {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: white;
+    border-radius: 25px;
+    padding: 30px 25px;
+    text-align: center;
+    z-index: 200;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+    max-width: 300px;
+    width: 90%;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .popup.show { transform: translate(-50%, -50%) scale(1); }
+  .popup .pop-emoji { font-size: 4rem; display: block; margin-bottom: 10px; }
+  .popup p { font-size: 1.1rem; color: #444; line-height: 1.6; }
+  .popup .close-btn {
+    margin-top: 15px;
+    background: #eee;
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 150;
+    display: none;
+  }
+  .overlay.show { display: block; }
+
+  /* Scroll bounce text */
+  .fun-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: textBounce 0.8s ease-in-out infinite alternate;
+    max-width: 400px;
+  }
+
+  @keyframes textBounce {
+    0%   { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-8px) scale(1.05); }
+  }
+
+  /* Stars */
+  .stars-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    animation: slideUp 0.7s ease 1s both;
+  }
+
+  .star {
+    font-size: 2rem;
+    animation: starSpin 3s linear infinite;
+    cursor: pointer;
+  }
+
+  .star:nth-child(2) { animation-delay: 0.3s; }
+  .star:nth-child(3) { animation-delay: 0.6s; }
+  .star:nth-child(4) { animation-delay: 0.9s; }
+  .star:nth-child(5) { animation-delay: 1.2s; }
+
+  @keyframes starSpin {
+    0%   { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(180deg) scale(1.3); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<div class="heart-rain" id="heart-rain"></div>
+<div class="cursor" id="cursor">✨</div>
+<div class="floaters" id="floaters"></div>
+<div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+<div class="popup" id="popup">
+  <span class="pop-emoji" id="pop-emoji">🎉</span>
+  <p id="pop-text">Hehe!</p>
+  <button class="close-btn" onclick="closePopup()">Đóng lại 👌</button>
+</div>
+
+<div class="container">
+
+  <div class="fun-text">Hiii, mở ra rồi thì cười đi nào! 😄</div>
+
+  <div class="hero">
+    <span class="big-emoji">🥳</span>
+    <h1>Chào bạn ơi!</h1>
+    <p>Trang web này được tạo ra chỉ để làm bạn vui thôi 🌈<br>Không có lý do gì cả, chỉ vì... tại sao không? 😜</p>
+  </div>
+
+  <div class="cards">
+    <div class="card" onclick="showPopup('🐸', 'Ếch ơi ếch, sao mày xanh vậy? — Tại tao chưa chín! 🤣')">
+      <span class="icon">🐸</span>
+      <span class="label">Tap tui!</span>
+    </div>
+    <div class="card" onclick="showPopup('🍕', 'Pizza không bao giờ phản bội bạn. Người yêu thì có thể, nhưng pizza thì không. 🍕❤️')">
+      <span class="icon">🍕</span>
+      <span class="label">Tap tui!</span>
+    </div>
+    <div class="card" onclick="showPopup('🦆', 'Vịt hỏi: Tại sao mày lúc nào cũng vui vậy? — Tại tao là vịt, tao không biết buồn là gì! 🦆')">
+      <span class="icon">🦆</span>
+      <span class="label">Tap tui!</span>
+    </div>
+  </div>
+
+  <div class="stars-row">
+    <span class="star" onclick="starClick(this)">⭐</span>
+    <span class="star" onclick="starClick(this)">🌟</span>
+    <span class="star" onclick="starClick(this)">✨</span>
+    <span class="star" onclick="starClick(this)">💫</span>
+    <span class="star" onclick="starClick(this)">⭐</span>
+  </div>
+
+  <div class="joke-box">
+    <h2>😂 Joke ngẫu nhiên</h2>
+    <p id="joke-text">Nhấn nút để nghe joke nào! 👇</p>
+    <button class="btn" onclick="newJoke()">Joke mới đi! 🎲</button>
+  </div>
+
+  <button class="btn heart-btn" onclick="heartRain()">Mưa tim đi! 💖</button>
+
+</div>
+
+<script>
+// ── Cursor follow ──
+const cursor = document.getElementById('cursor');
+const cursors = ['✨','🌟','💫','⭐','🎉','🌈','💖','🦄'];
+let ci = 0;
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top  = e.clientY + 'px';
+});
+document.addEventListener('click', () => {
+  ci = (ci + 1) % cursors.length;
+  cursor.textContent = cursors[ci];
+});
+
+// ── Floating emojis ──
+const floatEmojis = ['🌸','🎈','🦋','🌺','🍭','🎀','🌻','🍬','🎊','🌈','💝','🦄','🍩','🎵','🌙'];
+const floaters = document.getElementById('floaters');
+
+function spawnFloater() {
+  const el = document.createElement('div');
+  el.className = 'floater';
+  el.textContent = floatEmojis[Math.floor(Math.random() * floatEmojis.length)];
+  el.style.left = Math.random() * 100 + 'vw';
+  el.style.fontSize = (1.2 + Math.random() * 1.5) + 'rem';
+  const dur = 6 + Math.random() * 8;
+  el.style.animationDuration = dur + 's';
+  el.style.animationDelay = Math.random() * 4 + 's';
+  floaters.appendChild(el);
+  setTimeout(() => el.remove(), (dur + 4) * 1000);
+}
+setInterval(spawnFloater, 1200);
+for (let i = 0; i < 5; i++) spawnFloater();
+
+// ── Jokes ──
+const jokes = [
+  "Tại sao lập trình viên không thích ra ngoài? — Vì ngoài trời không có dark mode! 🌙",
+  "Con mèo hỏi con chó: Mày có bạn bè không? — Có chứ, nhưng tao không follow lại! 🐱",
+  "Tại sao cái bánh mì buồn? — Vì nó bị kẹp ở giữa! 🥪",
+  "Hỏi: Cái gì vừa tròn vừa vuông? — Trả lời: Cái bánh mì tròn bị cắt vuông! 🍞",
+  "Tại sao con cá không biết dùng máy tính? — Vì nó sợ net! 🐟",
+  "Bạch tuộc đi giày mất bao lâu? — Cả ngày vì phải buộc 8 cái dây! 🐙",
+  "Tại sao con số 6 sợ con số 7? — Vì 7 ăn 9! 😱",
+  "Hỏi: Cái gì có tai mà không nghe được? — Trả lời: Cái bắp ngô! 🌽",
+  "Tại sao ma không ăn kẹo? — Vì không có ruột! 👻",
+  "Con gà hỏi: Tại sao mày qua đường? — Để đến phía bên kia chứ sao! 🐔"
+];
+let lastJoke = -1;
+function newJoke() {
+  const el = document.getElementById('joke-text');
+  el.style.opacity = 0;
+  setTimeout(() => {
+    let idx;
+    do { idx = Math.floor(Math.random() * jokes.length); } while (idx === lastJoke);
+    lastJoke = idx;
+    el.textContent = jokes[idx];
+    el.style.opacity = 1;
+  }, 300);
+}
+
+// ── Popup ──
+function showPopup(emoji, text) {
+  document.getElementById('pop-emoji').textContent = emoji;
+  document.getElementById('pop-text').textContent = text;
+  document.getElementById('overlay').classList.add('show');
+  document.getElementById('popup').classList.add('show');
+}
+function closePopup() {
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('popup').classList.remove('show');
+}
+
+// ── Star click ──
+function starClick(el) {
+  el.style.transform = 'scale(2) rotate(360deg)';
+  el.style.transition = 'transform 0.4s';
+  setTimeout(() => { el.style.transform = ''; el.style.transition = ''; }, 500);
+  spawnBurst(el);
+}
+
+function spawnBurst(el) {
+  const rect = el.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const burstEmojis = ['✨','💫','⭐','🌟','🎉'];
+  for (let i = 0; i < 6; i++) {
+    const b = document.createElement('div');
+    b.style.cssText = `position:fixed;left:${cx}px;top:${cy}px;font-size:1.5rem;pointer-events:none;z-index:500;transition:all 0.8s ease-out;`;
+    b.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+    document.body.appendChild(b);
+    const angle = (i / 6) * Math.PI * 2;
+    const dist = 60 + Math.random() * 40;
+    requestAnimationFrame(() => {
+      b.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px)`;
+      b.style.opacity = '0';
+    });
+    setTimeout(() => b.remove(), 900);
+  }
+}
+
+// ── Heart rain (CSS-based, GPU accelerated) ──
+const heartContainer = document.getElementById('heart-rain');
+const hearts = ['💖','💗','💓','💕','💞','❤️','🧡','💛','💚','💙','💜'];
+
+function heartRain() {
+  const count = 25;
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    el.className = 'falling-heart';
+    el.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+    const dur = 2.5 + Math.random() * 2.5;
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = Math.random() * 1.5 + 's';
+    heartContainer.appendChild(el);
+    setTimeout(() => el.remove(), (dur + 1.5) * 1000);
+  }
+}
+
+// Auto heart rain on load
+setTimeout(heartRain, 1200);
+</script>
+</body>
+</html>
